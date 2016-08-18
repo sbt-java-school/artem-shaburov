@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Scanner;
  */
 public class FileUtils {
     /** path to the resources directory */
-    private static final String RESOURCES_DIRECTORY = "src/main/resources/";
+    private static final String RESOURCES_DIRECTORY_PATH = "src/main/resources/";
 
     /** empty constructor */
     public FileUtils() {
@@ -83,6 +82,7 @@ public class FileUtils {
         if (file.isDirectory()) {
             throw new FileNotFoundException("it is a directory. content can not be read");
         }
+
         StringBuilder result = new StringBuilder();
 
         try {
@@ -117,7 +117,7 @@ public class FileUtils {
      * @param text String to write
      */
     public void writeResourceFile(String path, String text) {
-        File file = new File(RESOURCES_DIRECTORY + path);
+        File file = new File(RESOURCES_DIRECTORY_PATH + path);
         write(file, text);
     }
 
