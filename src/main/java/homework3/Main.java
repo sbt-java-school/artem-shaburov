@@ -14,7 +14,7 @@ public class Main {
     /** с рекурсией */
     private static int binarySearch(int key, int[] array, int low, int high) {
         if (low > high) {
-            return -1;
+            throw new IllegalArgumentException("low can't be higher then high");
         }
         int mid = low + (high - low) / 2;
         if (key < array[mid]) {
@@ -28,7 +28,7 @@ public class Main {
     /** через вайл */
     private static int binarySearchNoRecursion(int key, int[] array, int low, int high) {
         if (low > high) {
-            return -1;
+            throw new IllegalArgumentException("low can't be higher then high");
         }
         int mid = low + (high - low) / 2;
         while (array[mid] != key) {
