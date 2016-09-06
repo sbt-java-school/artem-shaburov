@@ -27,9 +27,8 @@ public class BeanUtils {
      */
     public static void assign(Object to, Object from) throws InvocationTargetException, IllegalAccessException {
         Class fromClass = from.getClass();
-        Class toClass = to.getClass();
-        // получаем все методы класса
         Method[] fromMethods = fromClass.getDeclaredMethods();
+        Class toClass = to.getClass();
         Method[] toMethods = toClass.getDeclaredMethods();
 
         for (Method fromMethod : fromMethods) {
