@@ -37,7 +37,8 @@ public class FileUtils {
     public File getResourceFile(String path) {
         URL resource = getClass().getClassLoader().getResource(path);
         if (resource == null) {
-            throw new NullPointerException("no resources presented by this url");
+            return new File(RESOURCES_DIRECTORY_PATH + path);
+            //throw new NullPointerException("no resources presented by this url");
         }
         return new File(resource.getPath());
     }
@@ -117,7 +118,7 @@ public class FileUtils {
      * @param text String to write
      */
     public void writeResourceFile(String path, String text) {
-        File file = new File(RESOURCES_DIRECTORY_PATH + path);
+        File file = getResourceFile(path);
         write(file, text);
     }
 
