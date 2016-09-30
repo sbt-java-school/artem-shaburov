@@ -6,6 +6,7 @@
 
     <groupId>ru.sbt</groupId>
     <artifactId>artem-shaburov</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,6 +20,11 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>till-threads</module>
+        <module>multithreading</module>
+        <module>refactoring</module>
+    </modules>
 
     <dependencies>
         <dependency>
