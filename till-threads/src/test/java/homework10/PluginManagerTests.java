@@ -8,12 +8,12 @@ import org.junit.Test;
  */
 public class PluginManagerTests {
 
-    private static final String PLUGINS_ROOT_DIR_NAME = "src/main/resources/plugins/";
+    private static final String PLUGINS_ROOT_DIR_NAME = "src/main/resources";
 
     @Test
     public void classLoaderTest() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         PluginManager pluginManager = new PluginManager(PLUGINS_ROOT_DIR_NAME);
-        Plugin plugin = pluginManager.load("homework10", "PluginImpl");
+        Plugin plugin = pluginManager.load("plugin", "homework10.PluginImpl");
         if (plugin != null) {
             plugin.doSomething();
         }

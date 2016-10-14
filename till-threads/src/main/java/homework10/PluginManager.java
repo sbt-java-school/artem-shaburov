@@ -1,7 +1,6 @@
 package homework10;
 
-import org.jetbrains.annotations.Nullable;
-
+import javax.annotation.Nullable;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,7 +10,9 @@ import java.net.URLClassLoader;
  * @author artem
  */
 public class PluginManager {
+
     private final String pluginsRootDirectory;
+    private static final String PLUGIN_DIRECTORY_TEMPLATE = "%s/%s/";
 
     public PluginManager(String pluginsRootDirectory) {
         this.pluginsRootDirectory = "file:///" + pluginsRootDirectory;
@@ -19,14 +20,14 @@ public class PluginManager {
 
     @Nullable
     public Plugin load(String pluginName, String pluginClassName) {
-        // здесь скомпиленные классы плагина доджны подгружаться в наше приложение
-        File file = new File(pluginsRootDirectory);
+        // здесь скомпиленные классы плагина должны подгружаться в наше приложение
+        String pluginDirectory = String.format(PLUGIN_DIRECTORY_TEMPLATE, pluginsRootDirectory, pluginName);
+        File file = new File(pluginDirectory);
         try {
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
             URLClassLoader urlClassLoader = new MyClassLoader(urls);
-            String pluginFullName = String.format("%s.%s", pluginName, pluginClassName);
-            Object plugin = urlClassLoader.loadClass(pluginFullName).newInstance();
+            Object plugin = urlClassLoader.loadClass(pluginClassName).newInstance();
             return (Plugin) plugin;
         } catch (MalformedURLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             System.out.println(e.getMessage());
