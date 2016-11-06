@@ -9,9 +9,9 @@ public class SalaryPayment {
 
     private final Long employeeId;
     private final String employeeName;
-    private final BigDecimal salary;
+    private final double salary;
 
-    public SalaryPayment(Long employeeId, String employeeName, BigDecimal salary) {
+    public SalaryPayment(Long employeeId, String employeeName, double salary) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.salary = salary;
@@ -25,7 +25,7 @@ public class SalaryPayment {
         return employeeName;
     }
 
-    public BigDecimal getSalary() {
+    public double getSalary() {
         return salary;
     }
 

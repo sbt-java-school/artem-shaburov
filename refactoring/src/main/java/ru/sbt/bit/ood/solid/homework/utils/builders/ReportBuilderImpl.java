@@ -15,14 +15,14 @@ public class ReportBuilderImpl implements ReportBuilder {
         // create a StringBuilder holding a resulting html
         StringBuilder resultingHtml = new StringBuilder();
         resultingHtml.append("<html><body><table><tr><td>Employee</td><td>Salary</td></tr>");
-        BigDecimal totals = new BigDecimal(0);
+        double totals = 0;
         for (SalaryPayment salaryPayment : results) {
             // process each row of query results
             resultingHtml.append("<tr>"); // add row start tag
             resultingHtml.append("<td>").append(salaryPayment.getEmployeeName()).append("</td>"); // appending employee name
             resultingHtml.append("<td>").append(salaryPayment.getSalary()).append("</td>"); // appending employee salary for period
             resultingHtml.append("</tr>"); // add row end tag
-            totals.add(salaryPayment.getSalary()); // add salary to totals
+            totals += salaryPayment.getSalary(); // add salary to totals
         }
         resultingHtml.append("<tr><td>Total</td><td>").append(totals).append("</td></tr>");
         resultingHtml.append("</table></body></html>");

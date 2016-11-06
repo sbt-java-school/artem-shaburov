@@ -29,13 +29,12 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
- * @author artyom
+ * @author artem
  */
-class SendReportTester {
-
+class SendReportTest {
     private Connection connection;
 
-    SendReportTester(Connection connection) {
+    SendReportTest(Connection connection) {
         this.connection = connection;
     }
 
@@ -49,13 +48,15 @@ class SendReportTester {
         SalaryHtmlReportNotifier notificator = new SalaryHtmlReportNotifier(salaryPaymentDao, reportBuilder, sender);
         LocalDate dateFrom = LocalDate.of(2014, Month.JANUARY, 1);
         LocalDate dateTo = LocalDate.of(2014, Month.DECEMBER, 31);
-        // execute
-        notificator.generateAndSendHtmlSalaryReport("10", dateFrom, dateTo, "fake_mail@gmail.com");
 
         // mock mail related stuff
         MimeMessageHelper mockMimeMessageHelper = getMockedMimeMessageHelper();
+
+        // execute
+        notificator.generateAndSendHtmlSalaryReport("10", dateFrom, dateTo, "somebody@gmail.com");
+
         // verify results
-        String expectedReportPath = "src/connectionTest/resources/expectedReport.html";
+        String expectedReportPath = "/home/artyom/Documents/IdeaProjects/artem-shaburov/refactoring/src/test/resources/expectedReport.html";
         assertActualReportEqualsTo(mockMimeMessageHelper, expectedReportPath);
     }
 
@@ -73,8 +74,7 @@ class SendReportTester {
         when(mockMailSender.createMimeMessage()).thenReturn(mockMimeMessage);
         whenNew(JavaMailSenderImpl.class).withNoArguments().thenReturn(mockMailSender);
         MimeMessageHelper mockMimeMessageHelper = mock(MimeMessageHelper.class);
-        whenNew(MimeMessageHelper.class).withArguments(any(), any()).thenReturn(mockMimeMessageHelper);
+        whenNew(MimeMessageHelper.class).withArguments(any()).thenReturn(mockMimeMessageHelper);
         return mockMimeMessageHelper;
     }
-
 }

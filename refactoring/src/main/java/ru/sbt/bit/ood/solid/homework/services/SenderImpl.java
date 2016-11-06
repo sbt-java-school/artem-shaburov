@@ -20,7 +20,7 @@ public class SenderImpl implements Sender {
             mailSender.setHost("mail.google.com");
             // construct the message
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            MimeMessageHelper helper = new MimeMessageHelper(message);
             helper.setTo(recipient);
             // setting message text, last parameter 'true' says that it is HTML format
             helper.setText(report, true);

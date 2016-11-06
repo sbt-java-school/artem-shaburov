@@ -10,13 +10,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * @author artyom
+ * @author artem
  */
-class DatabaseTester {
-
+class DatabaseTest {
     private Connection connection;
 
-    DatabaseTester(Connection connection) {
+    DatabaseTest(Connection connection) {
         this.connection = connection;
     }
 
@@ -24,7 +23,7 @@ class DatabaseTester {
         // mock database related stuff
         ResultSet mockResultSet = getMockedResultSet(connection);
         when(mockResultSet.getString("emp_name")).thenReturn("John Doe", "Jane Dow");
-        when(mockResultSet.getDouble("salary")).thenReturn(100.0, 100.0, 50.0, 50.0);
+        when(mockResultSet.getDouble("salary")).thenReturn(100.0, 50.0, 50.0);
     }
 
     private ResultSet getMockedResultSet(Connection connection) throws SQLException {
@@ -35,5 +34,4 @@ class DatabaseTester {
         when(mockResultSet.next()).thenReturn(true, true, false);
         return mockResultSet;
     }
-
 }

@@ -37,7 +37,7 @@ public class SalaryPaymentDaoImpl implements SalaryPaymentDao {
                 Long employeeId = resultSet.getLong("emp_id");
                 String empName = resultSet.getString("emp_name");
                 double salary = resultSet.getDouble("salary");
-                SalaryPayment salaryPayment = new SalaryPayment(employeeId, empName, new BigDecimal(salary));
+                SalaryPayment salaryPayment = new SalaryPayment(employeeId, empName, salary);
                 salaryPayments.add(salaryPayment);
             }
         } catch (SQLException e) {
