@@ -5,6 +5,6 @@ package homework8;
  */
 public interface Calculator {
     @Cache
-    int plus(int a, int b);
+    Integer plus(int a, int b);
     int minus(int a, int b);
 }

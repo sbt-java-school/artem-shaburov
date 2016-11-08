@@ -1,12 +1,9 @@
 package ru.sbt.bit.ood.solid.homework.entities;
 
-import java.math.BigDecimal;
-
 /**
  * Created by artem
  */
 public class SalaryPayment {
-
     private final Long employeeId;
     private final String employeeName;
     private final double salary;
@@ -28,5 +25,4 @@ public class SalaryPayment {
     public double getSalary() {
         return salary;
     }
-
 }

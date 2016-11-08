@@ -5,7 +5,7 @@ package homework8;
  */
 public class CalculatorImpl implements Calculator {
     @Override
-    public int plus(int a, int b) {
+    public Integer plus(int a, int b) {
         return a + b;
     }
 

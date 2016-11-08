@@ -2,7 +2,6 @@ package ru.sbt.bit.ood.solid.homework.dao;
 
 import ru.sbt.bit.ood.solid.homework.entities.SalaryPayment;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.List;
  * Created by artem
  */
 public class SalaryPaymentDaoImpl implements SalaryPaymentDao {
-
     private Connection connection;
 
     public SalaryPaymentDaoImpl(Connection connection) {
@@ -45,5 +43,4 @@ public class SalaryPaymentDaoImpl implements SalaryPaymentDao {
         }
         return salaryPayments;
     }
-
 }
