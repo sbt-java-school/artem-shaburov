@@ -1,9 +1,9 @@
 package homework8;
 
 /**
- * Created by art
+ * Тестовая реализация интерфейса Calculator
  */
-public class CalculatorImpl implements Calculator {
+class CalculatorImpl implements Calculator {
     @Cache
     @Override
     public Integer plus(int a, int b) {

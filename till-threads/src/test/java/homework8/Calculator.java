@@ -1,9 +1,9 @@
 package homework8;
 
 /**
- * Created by art
+ * Тестовый интерфейс калькулятора
  */
-public interface Calculator {
+interface Calculator {
     Integer plus(int a, int b);
     Integer minus(int a, int b);
 }
