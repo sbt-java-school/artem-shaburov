@@ -1,5 +1,6 @@
 package homework8;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ProxyTests {
@@ -7,20 +8,19 @@ public class ProxyTests {
     public void referencesTest() {
         Calculator calculator = new CalculatorImpl();
         // не кешируемые результаты
-        calculator.plus(100, 100); // #1
-        calculator.plus(200, 200); // #2
-        calculator.plus(100, 100); // #3
+        Integer notCached1 = calculator.plus(100, 100); // #1
+        Integer notCached2 = calculator.plus(200, 200); // #2
+        Integer notCached3 = calculator.plus(100, 100); // #3
+
+        Assert.assertNotSame(notCached1, notCached3);
 
         // передаем вызовы методов в CacheProxy
         Calculator cached = ProxyUtils.makeCached(calculator);
-        Integer first = cached.plus(100, 100); // #1
-        Integer second = cached.plus(200, 200); // #2
-        Integer third = cached.plus(100, 100); // #1
-        // проверяем совпадают ли ссылки у двух одинаковых результатов, которые мы вытащили из кэша
-        System.out.println(first == second);
-        System.out.println(first == third);
+        Integer cached1 = cached.plus(100, 100); // #1
+        Integer cached2 = cached.plus(200, 200); // #2
+        Integer cached3 = cached.plus(100, 100); // #1
 
-        // минус не помечен кешем
-        cached.minus(100, 1);
+        // проверяем совпадают ли ссылки у двух одинаковых результатов, которые мы вытащили из кэша
+        Assert.assertSame(cached1, cached3);
     }
 }

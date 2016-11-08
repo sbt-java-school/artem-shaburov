@@ -24,15 +24,20 @@ public class CacheProxy implements InvocationHandler {
         if (object == null) {
             throw new NullPointerException("object can't be null");
         }
-        Object value = method.invoke(object, args);
+        Method classMethod = object.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
+        CacheKey cacheKey = null;
         if (method.isAnnotationPresent(Cache.class)) {
-            CacheKey cacheKey = new CacheKey(method, args);
+            cacheKey = new CacheKey(method, args);
+        } else if (classMethod.isAnnotationPresent(Cache.class)) {
+            cacheKey = new CacheKey(classMethod, args);
+        }
+        if (cacheKey != null) {
             if (!cachedResults.containsKey(cacheKey)) {
-                cachedResults.put(cacheKey, value);
+                cachedResults.put(cacheKey, method.invoke(object, args));
             }
             return cachedResults.get(cacheKey);
         }
-        return value;
+        return method.invoke(object, args);
     }
 
     // класс-помощник для упаковки метода и аргумента в один объект, который будет являться ключом к нашей мапе

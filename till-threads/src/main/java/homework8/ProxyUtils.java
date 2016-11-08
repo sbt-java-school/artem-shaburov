@@ -13,6 +13,7 @@ public class ProxyUtils {
                 objectClass.getInterfaces(),
                 new CacheProxy(object)
         );
-        return (T) proxyInstance;
+        @SuppressWarnings("unchecked") T tProxyInstance = (T) proxyInstance;
+        return tProxyInstance;
     }
 }
