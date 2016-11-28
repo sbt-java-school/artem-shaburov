@@ -22,7 +22,7 @@ public class DatabaseCreator {
 
     private static Logger logger = LoggerFactory.getLogger(DatabaseCreator.class);
     private static final String DATABASE_PATH =
-            "jdbc:h2:~/";
+            "jdbc:h2:/home/artyom/Documents/IdeaProjects/artem-shaburov/persistent-cache/database/app";
 
     public static void main(String[] args) {
         new DatabaseCreator().createTable();

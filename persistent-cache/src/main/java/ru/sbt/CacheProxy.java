@@ -19,7 +19,7 @@ public class CacheProxy implements InvocationHandler {
     private Logger logger = LoggerFactory.getLogger(CacheProxy.class);
     private Object delegate;
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(
-            "jdbc:h2:~/");
+            "jdbc:h2:~/Documents/IdeaProjects/artem-shaburov/persistent-cache/database/app");
     private CacheDao cacheDao = new CacheDaoJdbcImpl(jdbcTemplate);
 
     public CacheProxy(Object delegate) {

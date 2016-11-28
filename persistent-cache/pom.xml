@@ -21,6 +21,12 @@
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
+        <!-- file utils -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
