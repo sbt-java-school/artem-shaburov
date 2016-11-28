@@ -40,13 +40,14 @@
         <module>till-threads</module>
         <module>multithreading</module>
         <module>refactoring</module>
-        <module>client</module>
-        <module>server</module>
-        <module>core</module>
+        <module>chat-client</module>
+        <module>chat-server</module>
+        <module>chat-core</module>
         <module>patterns</module>
         <module>persistent-cache</module>
         <module>cook-book-core</module>
         <module>cook-book-web</module>
+        <module>cook-book</module>
     </modules>
 
     <dependencies>
@@ -76,12 +77,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <!-- file utils -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.version}</version>
         </dependency>
     </dependencies>
 
