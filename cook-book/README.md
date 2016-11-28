@@ -40,3 +40,5 @@ Recipe, Ingredient, RecipeIngredient.
 
 Проект был сделан с использованием файлов конфигураций,
 а также с использованием аннотаций.
+
+todo: validations.
