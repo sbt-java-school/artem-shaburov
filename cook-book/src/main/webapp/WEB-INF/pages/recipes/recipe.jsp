@@ -7,6 +7,18 @@
 <body>
 <p>${recipe.name}</p>
 <p>${recipe.instruction}</p>
+<table>
+    <c:forEach items="${ingredients}" var="ingredient">
+        <tr>
+            ${ingredient.name}
+        </tr>
+    </c:forEach>
+    <c:forEach items="${recipe.recipeIngredients}" var="recipeIngredient">
+        <tr>
+            ${recipeIngredient.quantity} ${recipeIngredient.units}
+        </tr>
+    </c:forEach>
+</table>
 <a href="<c:url value="/cook-book/recipes/${recipe.id}/edit"/>">Edit</a><br/>
 <p>Добавить новый ингредиент</p>
 <form action="<c:url value="/cook-book/ingredients"/>" method="post">

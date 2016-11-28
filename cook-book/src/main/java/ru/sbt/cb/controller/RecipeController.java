@@ -17,9 +17,14 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ * Mvc контроллер рецептов.
+ */
 @Controller
 public class RecipeController {
+
     private RecipeService recipeService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
 
     @Autowired
@@ -27,6 +32,11 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    /**
+     * Индекс страница рецептов. Показывает список всех рецептов.
+     *
+     * @return ModelAndView для jsp страницы recipes/list
+     */
     @RequestMapping(value = {"/recipes"}, method = GET)
     public ModelAndView list() {
         List<Recipe> recipes = recipeService.list();
@@ -35,11 +45,22 @@ public class RecipeController {
         return modelAndView;
     }
 
+    /**
+     * Форма для создания рецепта.
+     *
+     * @return jsp страницу recipes/form
+     */
     @RequestMapping(value = {"/recipes/new"}, method = GET)
     public String form() {
         return "recipes/form";
     }
 
+    /**
+     * Создание рецепта.
+     *
+     * @param recipe рецепт для создания
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/recipes"}, method = POST)
     public String create(@ModelAttribute Recipe recipe) {
         Long id = recipeService.create(recipe);
@@ -47,6 +68,12 @@ public class RecipeController {
         return "redirect:/cook-book/recipes";
     }
 
+    /**
+     * Страница конкретного рецепта.
+     *
+     * @param id id рецепта
+     * @return ModelAndView для jsp страницы recipes/recipe
+     */
     @RequestMapping(value = {"/recipes/{id}"}, method = GET)
     public ModelAndView get(@PathVariable("id") Long id) {
         Recipe recipe = recipeService.getById(id);
@@ -58,6 +85,12 @@ public class RecipeController {
         return modelAndView;
     }
 
+    /**
+     * Редактирование рецепта.
+     *
+     * @param id id рецепта
+     * @return ModelAndView для jsp страницы recipes/edit
+     */
     @RequestMapping(value = {"/recipes/{id}/edit"}, method = GET)
     public ModelAndView edit(@PathVariable("id") Long id) {
         Recipe recipe = recipeService.getById(id);
@@ -71,6 +104,13 @@ public class RecipeController {
         return modelAndView;
     }
 
+    /**
+     * Обновление рецепта.
+     *
+     * @param id     id рецепта
+     * @param recipe рецепт для обновления
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/recipes/{id}/edit"}, method = {POST, PATCH, PUT})
     public String update(@PathVariable("id") Long id, @ModelAttribute Recipe recipe) {
         recipe.setId(id);
@@ -78,6 +118,12 @@ public class RecipeController {
         return "redirect:/cook-book/recipes";
     }
 
+    /**
+     * Удаление рецепта.
+     *
+     * @param id id рецепта
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/recipes/{id}/delete"}, method = {GET, DELETE})
     public String delete(@PathVariable("id") Long id) {
         recipeService.delete(id);

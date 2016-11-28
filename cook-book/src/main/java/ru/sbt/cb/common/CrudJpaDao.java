@@ -9,7 +9,14 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * Реализация CrudDao с основными CRUD операциями.
+ *
+ * @param <T>  entity type
+ * @param <PK> primary key
+ */
 public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
+
     @PersistenceContext
     protected EntityManager entityManager;
     private Class<T> entityClass;
@@ -33,6 +40,9 @@ public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T create(T t) {
         if (t == null) {
@@ -42,6 +52,9 @@ public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
         return t;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T get(PK id) {
         if (id == null) {
@@ -56,6 +69,9 @@ public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
                 .getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T update(T t) {
         if (t == null) {
@@ -64,6 +80,9 @@ public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
         return entityManager.merge(t);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(PK id) {
         if (id == null) {
@@ -75,6 +94,9 @@ public class CrudJpaDao<T, PK> implements CrudDao<T, PK> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<T> getEntityClass() {
         return entityClass;

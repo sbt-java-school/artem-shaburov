@@ -21,15 +21,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 public class IngredientController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IngredientController.class);
-
     private IngredientService ingredientService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IngredientController.class);
 
     @Autowired
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
 
+    /**
+     * Индекс страница ингредиентов. Показывает список всех ингредиентов.
+     *
+     * @return ModelAndView для jsp страницы ingredients/list
+     */
     @RequestMapping(value = {"/ingredients"}, method = GET)
     public ModelAndView list() {
         List<Ingredient> ingredients = ingredientService.list();
@@ -38,11 +43,22 @@ public class IngredientController {
         return modelAndView;
     }
 
+    /**
+     * Форма для создания ингредиента.
+     *
+     * @return jsp страницу ingredients/form
+     */
     @RequestMapping(value = {"/ingredients/new"}, method = GET)
     public String form() {
         return "ingredients/form";
     }
 
+    /**
+     * Создание ингредиента.
+     *
+     * @param ingredient ингредиент для создания
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/ingredients"}, method = POST)
     public String create(@ModelAttribute Ingredient ingredient) {
         Long id = ingredientService.create(ingredient);
@@ -50,6 +66,12 @@ public class IngredientController {
         return "redirect:/cook-book/ingredients";
     }
 
+    /**
+     * Страница конкретного ингредиента.
+     *
+     * @param id id ингредиента
+     * @return ModelAndView для jsp страницы ingredients/ingredient
+     */
     @RequestMapping(value = {"/ingredients/{id}"}, method = GET)
     public ModelAndView get(@PathVariable("id") Long id) {
         Ingredient ingredient = ingredientService.getById(id);
@@ -58,6 +80,12 @@ public class IngredientController {
         return modelAndView;
     }
 
+    /**
+     * Редактирование ингредиента.
+     *
+     * @param id id ингредиента
+     * @return ModelAndView для jsp страницы ingredients/edit
+     */
     @RequestMapping(value = {"/ingredients/{id}/edit"}, method = GET)
     public ModelAndView edit(@PathVariable("id") Long id) {
         Ingredient ingredient = ingredientService.getById(id);
@@ -66,6 +94,13 @@ public class IngredientController {
         return modelAndView;
     }
 
+    /**
+     * Обновление ингредиента.
+     *
+     * @param id         id ингредиента
+     * @param ingredient ингредиент для обновления
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/ingredients/{id}/edit"}, method = {POST, PATCH, PUT})
     public String update(@PathVariable("id") Long id, @ModelAttribute Ingredient ingredient) {
         ingredient.setId(id);
@@ -74,6 +109,12 @@ public class IngredientController {
         return "redirect:/cook-book/ingredients";
     }
 
+    /**
+     * Удаление ингредиента.
+     *
+     * @param id id ингредиента
+     * @return редиректит на индекс страницу
+     */
     @RequestMapping(value = {"/ingredients/{id}/delete"}, method = {GET, DELETE})
     public String delete(@PathVariable("id") Long id) {
         ingredientService.delete(id);
